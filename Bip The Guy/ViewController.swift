@@ -11,7 +11,7 @@ import AVFoundation
 
 // We need to declare the two additional delegate protocols below in order to use a UIImagePickerController
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
-
+    
     // MARK: Properties
     
     // We added a tap gesture to this image & created an @IBAction below for this tap gesture so that we can detect if we tap on the image
@@ -29,12 +29,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // The UIImagePicker's delegate property needs to be assigned to self (which is the current view controller).  Note that it's done in viewDidLoad here, which is the answer to one of our exercise questions.
         imagePicker.delegate = self
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: Functions
     
     // Called to make the image spring when pressed
@@ -66,10 +66,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
-    // This method is required to get the image picked from the UIImagePickerController
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        // The info[] parameter will get a particular kind of media.  Here we get the original image.  We use as! UIImage to cast the data passed into selectedImage as a UIImage.
-        let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         // Add our selectedImage to the .image parameter of our imageToPunch
         imageToPunch.image = selectedImage
         // Now that we've got the image we can close the UIImagePicker using the dismiss method
